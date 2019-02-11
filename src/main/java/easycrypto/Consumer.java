@@ -12,10 +12,8 @@ public interface Consumer {
         properties.put("auto.commit.interval.ms", "1000");
         properties.put("auto.offset.reset", "earliest");
         properties.put("session.timeout.ms", "30000");
-        properties.put("key.deserializer",
-                "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("value.deserializer",
-                "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         return properties;
     }
 
