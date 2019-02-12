@@ -1,4 +1,4 @@
-package easycrypto;
+package easycrypto.infraestructure;
 
 import java.util.Properties;
 

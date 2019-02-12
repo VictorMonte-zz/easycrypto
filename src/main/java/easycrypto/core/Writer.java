@@ -1,5 +1,6 @@
-package easycrypto;
+package easycrypto.core;
 
+import easycrypto.infraestructure.Producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.util.Properties;
