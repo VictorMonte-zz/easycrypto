@@ -7,12 +7,13 @@ public class ProcessingEngine {
         String servers = args[0];
         String groupId = args[1];
         String sourceTopic = args[2];
-        String targetTopic = args[3];
+        String validTopic = args[3];
+        String invalidTopic = args[4];
 
         Reader reader = new Reader(servers, groupId, sourceTopic);
-        Writer writer = new Writer(servers, targetTopic);
+        Validator validator = new Validator(servers, validTopic, invalidTopic);
 
-        reader.run(writer);
+        reader.run(validator);
 
     }
 }
