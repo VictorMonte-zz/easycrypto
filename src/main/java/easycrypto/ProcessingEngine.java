@@ -1,5 +1,6 @@
 package easycrypto;
 
+import easycrypto.core.Enricher;
 import easycrypto.core.Reader;
 import easycrypto.core.Validator;
 
@@ -14,9 +15,8 @@ public class ProcessingEngine {
         String invalidTopic = args[4];
 
         Reader reader = new Reader(servers, groupId, sourceTopic);
-        Validator validator = new Validator(servers, validTopic, invalidTopic);
-
-        reader.run(validator);
+        Enricher enricher = new Enricher(servers, validTopic, invalidTopic);
+        reader.run(enricher);
 
     }
 }
