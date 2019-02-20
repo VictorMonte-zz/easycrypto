@@ -33,18 +33,25 @@ public class Enricher implements Producer {
         try {
 
             final JsonNode root = MAPPER.readTree(message);
-            addGeoLocation(root);
-            addPrice(root);
+            if (hasNode(root)) {
 
-            Producer.write(
-                    this.producer,
-                    this.validMessages,
-                    MAPPER.writeValueAsString(root));
+                addGeoLocation(root);
+                addPrice(root);
+
+                Producer.write(
+                        this.producer,
+                        this.validMessages,
+                        MAPPER.writeValueAsString(root));
+            }
 
         } catch (IOException e) {
             logger.error(e);
             e.printStackTrace();
         }
+    }
+
+    private boolean hasNode(JsonNode root) {
+        return root != null;
     }
 
     private void addPrice(JsonNode root) {
