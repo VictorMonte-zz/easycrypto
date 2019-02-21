@@ -1,6 +1,23 @@
 ---
 version: '2'
 services:
+
+  app:
+    build:
+      context: .
+    environment:
+      SERVERS: kafka:29092
+      GROUP_ID: foo
+      SOURCE_TOPIC: input-topic
+      VALID_TOPIC: valid-messages
+      INVALID_TOPIC: invalid-messages
+    depends_on:
+      - kafka
+      - zookeeper
+    links:
+      - kafka
+
+
   zookeeper:
     image: confluentinc/cp-zookeeper:3.2.1
     ports:
