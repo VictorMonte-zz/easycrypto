@@ -11,6 +11,7 @@ services:
       SOURCE_TOPIC: input-topic
       VALID_TOPIC: valid-messages
       INVALID_TOPIC: invalid-messages
+      OPENEXCHANGE_API_KEY: INSERT-YOUR-API-KEY-HERE
     depends_on:
       - kafka
       - zookeeper

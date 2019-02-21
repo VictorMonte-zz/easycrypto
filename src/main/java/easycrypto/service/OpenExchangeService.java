@@ -6,19 +6,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public final class OpenExchangeService {
 
-    private static final String API_KEY = "";
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final Logger logger = LogManager.getLogger();
+    private String apiKey;
+
+    public OpenExchangeService() {
+        this.apiKey = System.getenv("OPENEXCHANGE_API_KEY");
+    }
 
     public double getPrice(String currency) {
 
         try {
-            final URL url = new URL("https://openexchangerates.org/api/latest.json?app_id=" + API_KEY);
+            final URL url = new URL("https://openexchangerates.org/api/latest.json?app_id=" + apiKey);
             final JsonNode root = MAPPER.readTree(url);
             final JsonNode node = root.path("rates").path(currency);
             return Double.parseDouble(node.toString());
