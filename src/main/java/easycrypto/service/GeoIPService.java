@@ -11,7 +11,7 @@ import java.net.InetAddress;
 
 public class GeoIPService {
 
-    private static final String MAXMINDDB_LOCATION = "src/main/resources/GeoLite2-City.mmdb";
+    private static final String MAXMINDDB_LOCATION = "GeoLite2-City.mmdb";
     private static final Logger logger = LogManager.getLogger();
 
     public CityResponse getLocation(String ipAddress) {
