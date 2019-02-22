@@ -13,7 +13,7 @@ services:
       SOURCE_TOPIC: input-topic
       VALID_TOPIC: valid-messages
       INVALID_TOPIC: invalid-messages
-      OPENEXCHANGE_API_KEY: 8185ba3a8752427391de77760c3d57ef
+      OPENEXCHANGE_API_KEY: INSERT_YOUR_KEY_HERE
       JAVA_OPTS: " -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
     depends_on:
       - kafka
