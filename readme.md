@@ -34,7 +34,7 @@ Build jar
 gradle jar
 ```
 
-Build images
+Build and run images
 
 ```
 docker-compose up --build
