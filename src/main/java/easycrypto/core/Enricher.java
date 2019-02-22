@@ -42,6 +42,8 @@ public class Enricher implements Producer {
                         this.producer,
                         this.validMessages,
                         MAPPER.writeValueAsString(root));
+
+                logger.info("Sent to valid message topic");
             }
 
         } catch (IOException e) {
@@ -55,11 +57,13 @@ public class Enricher implements Producer {
     }
 
     private void addPrice(JsonNode root) {
+        logger.info("Getting price");
         final OpenExchangeService exchangeService = new OpenExchangeService();
         ((ObjectNode) root).with("currency").put("rate", exchangeService.getPrice("BTC"));
     }
 
     private void addGeoLocation(JsonNode root) {
+        logger.info("Getting geo location");
 
         final JsonNode ipAddressNode = root.path("customer").path("ipAddress");
 
@@ -73,6 +77,8 @@ public class Enricher implements Producer {
 
             final String ipAddress = ipAddressNode.textValue();
             final CityResponse response = new GeoIPService().getLocation(ipAddress);
+
+            logger.info("Geo location founded");
 
             ((ObjectNode) root).with("customer").put("country", response.getCountry().getName());
             ((ObjectNode) root).with("customer").put("city", response.getCity().getName());
