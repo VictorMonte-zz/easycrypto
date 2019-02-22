@@ -5,18 +5,27 @@ services:
   app:
     build:
       context: .
+    ports:
+      - 5005:5005
     environment:
       SERVERS: kafka:29092
       GROUP_ID: foo
       SOURCE_TOPIC: input-topic
       VALID_TOPIC: valid-messages
       INVALID_TOPIC: invalid-messages
-      OPENEXCHANGE_API_KEY: INSERT-YOUR-API-KEY-HERE
+      OPENEXCHANGE_API_KEY: 8185ba3a8752427391de77760c3d57ef
+      JAVA_OPTS: " -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
     depends_on:
       - kafka
       - zookeeper
     links:
       - kafka
+      - zookeeper
+    extra_hosts:
+      - "moby:127.0.0.1"
+      - "localhost: 127.0.0.1"
+    networks:
+      - easycryptonet
 
 
   zookeeper:
@@ -29,6 +38,8 @@ services:
     extra_hosts:
     - "moby:127.0.0.1"
     - "localhost: 127.0.0.1"
+    networks:
+        - easycryptonet
 
   kafka:
     image: confluentinc/cp-kafka:3.2.1
@@ -39,9 +50,16 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
       KAFKA_DELETE_TOPIC_ENABLE: "true"
+      KAFKA_ADVERTISED_HOST_NAME: kafka
     extra_hosts:
     - "moby:127.0.0.1"
     - "localhost: 127.0.0.1"
+    networks:
+        - easycryptonet
+
+networks:
+  easycryptonet:
+    driver: bridge
