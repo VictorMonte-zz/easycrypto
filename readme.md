@@ -1,7 +1,5 @@
 # Easycrypto
 
-[PoC]
-
 Application that enriches a request info message with cryptocoin`s 
 price and geo location.
 
